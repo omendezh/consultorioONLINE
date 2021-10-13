@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package logica;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,82 +17,46 @@ import persistencia.ConexionBD;
  */
 public class Paciente {
 
-    private int id_paciente;
-    private String codpaciente;
-    private String nombres;
-    private String apellidos;
-    private String fecha_nacimiento;
-    private String email;
-    private String telefono;
+    private int identificacion;
+    private String nombre;
+    private String apellido;
+    private String genero;
+    private String tipoIdentificacion;
     private String celular;
     private String direccion;
-    private String barrio;
-    private String ciudad;
-    private String genero;
+    private String email;
     
 
     public Paciente() {
     }
-
-    public Paciente getPaciente(int id_paciente) throws SQLException {
-        this.id_paciente = id_paciente;
+    
+    public Paciente getPaciente(int identificacion) throws SQLException {
+        this.identificacion= identificacion;
         return this.getPaciente();
     }
 
-    public int getid_paciente() {
-        return id_paciente;
+    public int getIdentificacion() {
+        return identificacion;
     }
 
-    public void setcodpaciente(int id_paciente) {
-        this.id_paciente = id_paciente;
+    public void setIdentificacion(int identificacion) {
+        this.identificacion = identificacion;
     }
 
-    public String getnombres() {
-        return nombres;
+    public String getNombre() {
+        return nombre;
     }
 
-    public String getFecha_nacimiento() {
-        return fecha_nacimiento;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public void setFecha_nacimiento(String fecha_nacimiento) {
-        this.fecha_nacimiento = fecha_nacimiento;
+    public String getApellido() {
+        return apellido;
     }
 
-    public String getCelular() {
-        return celular;
-    }
-
-    public void setCelular(String celular) {
-        this.celular = celular;
-    }
-
-    public String getBarrio() {
-        return barrio;
-    }
-
-    public void setBarrio(String barrio) {
-        this.barrio = barrio;
-    }
-
-    public String getCiudad() {
-        return ciudad;
-    }
-
-    public void setCiudad(String ciudad) {
-        this.ciudad = ciudad;
-    }
-
-    public void setnombres(String nombres) {
-        this.nombres = nombres;
-    }
-
-    public String getapellidos() {
-        return apellidos;
-    }
-
-    public void setapellidos(String apellidos) {
-        this.apellidos = apellidos;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
     public String getGenero() {
@@ -104,20 +67,20 @@ public class Paciente {
         this.genero = genero;
     }
 
-    public String getcodpaciente() {
-        return codpaciente;
+    public String getTipoIdentificacion() {
+        return tipoIdentificacion;
     }
 
-    public void setcodpaciente(String codpaciente) {
-        this.codpaciente = codpaciente;
+    public void setTipoIdentificacion(String tipoIdentificacion) {
+        this.tipoIdentificacion = tipoIdentificacion;
     }
 
-    public String getTelefono() {
-        return telefono;
+    public String getCelular() {
+        return celular;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+    public void setCelular(String celular) {
+        this.celular = celular;
     }
 
     public String getDireccion() {
@@ -128,22 +91,22 @@ public class Paciente {
         this.direccion = direccion;
     }
 
-    public String getemail() {
+    public String getEmail() {
         return email;
     }
 
-    public void setemail(String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
-
+    
+    
 
     public boolean guardarPaciente() {
         ConexionBD conexion = new ConexionBD();
-        
-        String sentencia = "INSERT INTO Pacientes(codpaciente, nombres, apellidos, genero, codpaciente, telefono, direccion, email) "
-                + " VALUES ( '" + this.codpaciente + "','" + this.nombres + "',"
-                + "'" + this.apellidos + "','" + this.genero + "','" + this.codpaciente + "',"
-                + "'" + this.telefono + "','" + this.direccion + "','" + this.email +  "');  ";
+        String sentencia = "INSERT INTO `pacientes` (identificacion, nombre, apellido, genero, tipoIdentificacion, celular, direccion, email) "
+                + " VALUES ( '" + this.identificacion + "','" + this.nombre + "',"
+                + "'" + this.apellido + "','" + this.genero + "','" + this.tipoIdentificacion + "',"
+                + "'" + this.celular + "','" + this.direccion + "','" + this.email +  "');  ";
         if (conexion.setAutoCommitBD(false)) {
             if (conexion.insertarBD(sentencia)) {
                 conexion.commitBD();
@@ -160,8 +123,8 @@ public class Paciente {
         }
     }
 
-    public boolean borrarPaciente(int codpaciente) {
-        String Sentencia = "DELETE FROM `Pacientes` WHERE `codpaciente`='" + codpaciente + "'";
+    public boolean borrarPaciente(int identificacion) {
+        String Sentencia = "DELETE FROM `pacientes` WHERE `identificacion`='" + identificacion + "'";
         ConexionBD conexion = new ConexionBD();
         if (conexion.setAutoCommitBD(false)) {
             if (conexion.actualizarBD(Sentencia)) {
@@ -181,9 +144,9 @@ public class Paciente {
 
     public boolean actualizarPaciente() {
         ConexionBD conexion = new ConexionBD();
-        String Sentencia = "UPDATE `Pacientes` SET nombres='" + this.nombres + "',apellidos='" + this.apellidos + "',genero='" + this.genero
-                + "',codpaciente='" + this.codpaciente + "',telefono='" + this.telefono + "',direccion='" + this.direccion + "',email='" + this.email
-                +  "' WHERE codpaciente=" + this.codpaciente + ";";
+        String Sentencia = "UPDATE `pacientes` SET nombre='" + this.nombre + "',apellido='" + this.apellido + "',genero='" + this.genero
+                + "',tipoIdentificacion='" + this.tipoIdentificacion + "',celular='" + this.celular + "',direccion='" + this.direccion + "',email='" + this.email
+                +  "' WHERE identificacion=" + this.identificacion + ";";
         if (conexion.setAutoCommitBD(false)) {
             if (conexion.actualizarBD(Sentencia)) {
                 conexion.commitBD();
@@ -203,20 +166,21 @@ public class Paciente {
     public List<Paciente> listarPacientes() throws SQLException {
         ConexionBD conexion = new ConexionBD();
         List<Paciente> listaPacientes = new ArrayList<>();
-        String sql = "select * from Pacientes order by codpaciente asc";
+        String sql = "select * from pacientes order by identificacion asc";
         ResultSet rs = conexion.consultarBD(sql);
-        Paciente c;
+        Paciente p;
         while (rs.next()) {
-            c = new Paciente();
-            c.setcodpaciente(rs.getInt("codpaciente"));
-            c.setnombres(rs.getString("nombres"));
-            c.setapellidos(rs.getString("apellidos"));
-            c.setGenero(rs.getString("genero"));
-            c.setcodpaciente(rs.getString("codpaciente"));
-            c.setTelefono(rs.getString("telefono"));
-            c.setDireccion(rs.getString("direccion"));
-            c.setemail(rs.getString("email"));
-            listaPacientes.add(c);
+            p = new Paciente();
+            p.setIdentificacion(rs.getInt("identificacion"));
+            p.setNombre(rs.getString("nombre"));
+            p.setApellido(rs.getString("apellido"));
+            p.setGenero(rs.getString("genero"));
+            p.setTipoIdentificacion(rs.getString("tipoIdentificacion"));
+            p.setCelular(rs.getString("celular"));
+            p.setDireccion(rs.getString("direccion"));
+            p.setEmail(rs.getString("email"));
+            
+            listaPacientes.add(p);
 
         }
         conexion.cerrarConexion();
@@ -225,17 +189,20 @@ public class Paciente {
 
     public Paciente getPaciente() throws SQLException {
         ConexionBD conexion = new ConexionBD();
-        String sql = "select * from pacientes where codpaciente='" + this.codpaciente + "'";
+        String sql = "select * from pacientes where identificacion='" + this.identificacion + "'";
         ResultSet rs = conexion.consultarBD(sql);
         if (rs.next()) {
-            this.id_paciente = rs.getInt("id_paciente");
-            this.nombres = rs.getString("nombres");
-            this.apellidos = rs.getString("apellidos");
+            this.identificacion = rs.getInt("identificacion");
+            this.nombre = rs.getString("nombre");
+            this.apellido = rs.getString("apellido");
             this.genero = rs.getString("genero");
-            this.codpaciente = rs.getString("codpaciente");
-            this.telefono = rs.getString("telefono");
+            this.tipoIdentificacion = rs.getString("tipoIdentificacion");
+            this.celular = rs.getString("celular");
             this.direccion = rs.getString("direccion");
             this.email = rs.getString("email");
+            
+            
+            
             conexion.cerrarConexion();
             return this;
 
@@ -248,6 +215,6 @@ public class Paciente {
 
     @Override
     public String toString() {
-        return "Paciente{" + "codpaciente=" + codpaciente + ", nombres=" + nombres + ", apellidos=" + apellidos + ", genero=" + genero + ", codpaciente=" + codpaciente + ", telefono=" + telefono + ", direccion=" + direccion + ", email=" + email + '}';
+        return "Paciente{" + "identificacion=" + identificacion + ", nombre=" + nombre + ", apellido=" + apellido + ", genero=" + genero + ", tipoIdentificacion=" + tipoIdentificacion + ", celular=" + celular + ", direccion=" + direccion + ", email=" + email + '}';
     }
 }

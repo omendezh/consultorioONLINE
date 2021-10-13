@@ -1,7 +1,7 @@
 <%-- 
     Document   : Archivo de peticiones
     Created on : dd/mm/yyyy, hh:mm: AM/PM
-    Author     : nombre autor
+    Author     : Grupo 6 MISION TIC S52
 
 --%>
 
@@ -21,10 +21,10 @@
 
     //Lista de procesos o tareas a realizar 
     List<String> tareas = Arrays.asList(new String[]{
-        "actualizarcontacto",
-        "eliminarcontacto",
-        "listarcontacto",
-        "guardarContacto"
+        "actualizarpaciente", //no funciona
+        "eliminarpaciente", // no funciona
+        "listarpaciente",
+        "guardarpaciente",
     });
     
     String proceso = "" + request.getParameter("proceso");
@@ -32,91 +32,95 @@
     // Validación de parámetros utilizados en todos los procesos.
     if (tareas.contains(proceso)) {
         respuesta += "\"ok\": true,";
-        // ------------------------------------------------------------------------------------- //
-        // -----------------------------------INICIO PROCESOS----------------------------------- //
-        // ------------------------------------------------------------------------------------- //
-        if (proceso.equals("guardarContacto")) {
+        // --------------------------------- //
+        // -----------FIN PROCESOS---------- //
+        // --------------------------------- //
+        
+        if (proceso.equals("guardarPaciente")) {
             int ident = Integer.parseInt(request.getParameter("identificacion"));
             String nombre = request.getParameter("nombre");
             String apellido = request.getParameter("apellido");
             String genero = request.getParameter("genero");
             String tipoident = request.getParameter("tipoIdentificacion");
-            String telefono = request.getParameter("telefono");
+            String celular = request.getParameter("celular");
             String direccion = request.getParameter("direccion");
-            String correo = request.getParameter("correo");
-            //boolean favorito = Boolean.parseBoolean(request.getParameter("favorito"));
+            String email = request.getParameter("email");
+            boolean favorito = Boolean.parseBoolean(request.getParameter("favorito"));
+            //p.llenarPaciente (ident, nombre, apellido, genero, tipoident, celular, direccion, email);
             //su codigo acá
-            Contacto c= new Contacto();
-            c.setNombre(nombre);
-            c.setIdentificacion(ident);
-            c.setApellido(apellido);
-            c.setGenero(genero);
-            c.setTipoIdentificacion(tipoident);
-            c.setTelefono(telefono);
-            c.setDireccion(direccion);
-            c.setCorreo(correo);
-            if (c.guardarContacto()){
+            Paciente p = new Paciente();
+            p.setIdentificacion(ident);
+            p.setNombre(nombre);
+            p.setApellido(apellido);
+            p.setGenero(genero);
+            p.setTipoIdentificacion(tipoident);
+            p.setCelular(celular);
+            p.setDireccion(direccion);
+            p.setEmail(email);
+            if (p.guardarPaciente()){
                     respuesta += "\"" + proceso + "\": true";
             } else {
                 respuesta += "\"" + proceso + "\": false";
             }
 
-        } else if (proceso.equals("eliminarcontacto")) {
+        } else if (proceso.equals("eliminarpaciente")) {
             int identificacion = Integer.parseInt(request.getParameter("identificacion"));
             //su codigo acá
-            Contacto c= new Contacto();
-            if (c.borrarContacto(identificacion)) {
+            Paciente p= new Paciente();
+            if (p.borrarPaciente(identificacion)) {
                 respuesta += "\"" + proceso + "\": true";
             } else {
                 respuesta += "\"" + proceso + "\": false";
-            }
+            } 
 
-        } else if (proceso.equals("listarcontacto")) {
+        } else if (proceso.equals("listarpaciente")) {
             //su codigo acá
-            Contacto c= new Contacto();
+            Paciente p= new Paciente();
             try {
-                List<Contacto> lista = c.listarContactos();
-                respuesta += "\"" + proceso + "\": true,\"Contactos\":" + new Gson().toJson(lista);
+                List<Paciente> lista = p.listarPacientes();
+                respuesta += "\"" + proceso + "\": true,\"Pacientes\":" + new Gson().toJson(lista);
             } catch (SQLException ex) {
-                respuesta += "\"" + proceso + "\": true,\"Contactos\":[]";
-                Logger.getLogger(Contacto.class.getName()).log(Level.SEVERE, null, ex);
+                respuesta += "\"" + proceso + "\": true,\"Pacientes\":[]";
+                Logger.getLogger(Paciente.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else if (proceso.equals("actualizarcontacto")) {
+        } else if (proceso.equals("actualizarpaciente")) {
             int ident = Integer.parseInt(request.getParameter("identificacion"));
             String nombre = request.getParameter("nombre");
             String apellido = request.getParameter("apellido");
             String genero = request.getParameter("genero");
             String tipoident = request.getParameter("tipoIdentificacion");
-            String telefono = request.getParameter("telefono");
+            String celular = request.getParameter("celular");
             String direccion = request.getParameter("direccion");
-            String correo = request.getParameter("correo");
-          
+            String email = request.getParameter("email");
+            boolean favorito = Boolean.parseBoolean(request.getParameter("favorito"));
             //su codigo acá
-            Contacto c= new Contacto(); 
-            c.setNombre(nombre);
-            c.setIdentificacion(ident);
-            c.setApellido(apellido);
-            c.setGenero(genero);
-            c.setTipoIdentificacion(tipoident);
-            c.setTelefono(telefono);
-            c.setDireccion(direccion);
-            c.setCorreo(correo);
-            if (c.actualizarContacto()) {
+           
+            Paciente p= new Paciente(); 
+            p.setNombre(nombre);
+            p.setIdentificacion(ident);
+            p.setApellido(apellido);
+            p.setGenero(genero);
+            p.setTipoIdentificacion(tipoident);
+            p.setCelular(celular);
+            p.setDireccion(direccion);
+            p.setEmail(email);                   
+                
+            if (p.actualizarPaciente()) {
                 respuesta += "\"" + proceso + "\": true";
             } else {
                 respuesta += "\"" + proceso + "\": false";
-            }
+            } 
         }
 
-        // ------------------------------------------------------------------------------------- //
-        // -----------------------------------FIN PROCESOS-------------------------------------- //
-        // ------------------------------------------------------------------------------------- //
+        // --------------------------------- //
+        // -----------FIN PROCESOS---------- //
+        // --------------------------------- //
         // Proceso desconocido.
     } else {
         respuesta += "\"ok\": false,";
         respuesta += "\"error\": \"INVALID\",";
-        respuesta += "\"errorMsg\": \"Lo sentimos, los datos que ha enviado,"
-                + " son inválidos. Corrijalos y vuelva a intentar por favor.\"";
+        respuesta += "\"errorMsg\": \"PUTO Error otra vez -> los datos que ha enviado,"
+                + " son inválidos. Corregir y vuelver a intentar por favor.\"";
     }
     // Usuario sin sesión.
     // Responder como objeto JSON codificación ISO 8859-1.
@@ -124,3 +128,4 @@
     response.setContentType("application/json;charset=iso-8859-1");
     out.print(respuesta);
 %>
+
