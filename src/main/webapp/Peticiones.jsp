@@ -24,7 +24,7 @@
         "actualizarpaciente", //no funciona
         "eliminarpaciente", // no funciona
         "listarpaciente",
-        "guardarpaciente",
+        "guardarPaciente",
     });
     
     String proceso = "" + request.getParameter("proceso");
@@ -119,8 +119,8 @@
     } else {
         respuesta += "\"ok\": false,";
         respuesta += "\"error\": \"INVALID\",";
-        respuesta += "\"errorMsg\": \"PUTO Error otra vez -> los datos que ha enviado,"
-                + " son inválidos. Corregir y vuelver a intentar por favor.\"";
+        respuesta += "\"errorMsg\": \"NOoooo Error otra vez -> los datos que ha enviado,"
+                + " son inválidos. Corregir y volver a intentar por favor.\"";
     }
     // Usuario sin sesión.
     // Responder como objeto JSON codificación ISO 8859-1.

@@ -46,6 +46,7 @@
                             <select class="form-control" ng-model="cn.genero" required>
                                 <option>Masculino</option>
                                 <option>Femenino</option>
+                                <option>No Definido</option>
                             </select>
                         </div>
                     </div>
@@ -226,7 +227,7 @@
                 }).then(function (res) {
                     if (res.data.ok === true) {
                         if (res.data[paciente.proceso] === true) {
-                            alert("Eliminado con éxito");
+                            alert("Registro Eliminado con éxito");
                             //                                cn.listarpacientes();
                         } else {
                             alert("Por favor vefifique sus datos");
@@ -258,7 +259,7 @@
                 }).then(function (res) {
                     if (res.data.ok === true) {
                         if (res.data[paciente.proceso] === true) {
-                            alert("Actualizar Paciente con éxito");
+                            alert("Se Actualizó Datos de Paciente con éxito");
                             //                                cn.listarpacientes();
                         } else {
                             alert("Favor vefifique los datos");

@@ -46,7 +46,7 @@ public class ConexionBD {
             // Realizar la conexion
             con = DriverManager.getConnection(url, username, password);
             con.setTransactionIsolation(8);
-            System.out.println("OMAR FUNCIONÓ LA CONEXION CON LA BDATOS");
+            System.out.println("*********** OMAR FUNCIONÓ LA CONEXION CON LA BDATOS*********** ");
         } catch (SQLException ex) {
             Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
         }
