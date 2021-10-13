@@ -1,15 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package persistencia;
 
-/**
- *
- * @author Ragnarook
- */
-   
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,12 +21,21 @@ public class ConexionBD {
 
     //Constructor sin parmetros		
     public ConexionBD() {
+        local = true;
         DB_driver = "com.mysql.cj.jdbc.Driver";
-        host = "localhost:3306";
-        db = "consultorionline";
-        url = "jdbc:mysql://" + host + "/" + db+"?serverTimezone=UTC"; 		//URL DB
-        username = "root";                      			//usuario base de datos global 
-        password = "0m3nd3z*";
+        if (local) {
+            host = "localhost:3306";
+            db = "consultorionline";
+            url = "jdbc:mysql://" + host + "/" + db; 		//URL DB
+            username = "root";                      			//usuario base de datos global 
+            password = "0m3nd3z";
+        } else {
+            host = "us-mm-auto-dca-04-b.cleardb.net:3306";
+            db = "consultorionline";
+            url = "jdbc:mysql://" + host + "/" + db; 		//URL DB
+            username = "root";                      			//usuario base de datos global 
+            password = "0m3nd3z";
+        }
         try {
             //Asignacin del Driver
             Class.forName(DB_driver);
@@ -47,7 +46,7 @@ public class ConexionBD {
             // Realizar la conexion
             con = DriverManager.getConnection(url, username, password);
             con.setTransactionIsolation(8);
-            System.out.println("conectado");
+            System.out.println("OMAR FUNCIONÓ LA CONEXION CON LA BDATOS");
         } catch (SQLException ex) {
             Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -152,9 +151,11 @@ public class ConexionBD {
             return false;
         }
     }
+
     public static void main(String[] args) {
-       ConexionBD c= new ConexionBD();
-       
-    }
+        ConexionBD b = new ConexionBD();
+        b.cerrarConexion();
+        }
+
     
-} //cierre de public class ConexionBD
+}
