@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Consultorio Online</title>
+        <title>JSP Page</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
          
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
@@ -17,28 +17,28 @@
        
     </head>
     <body>
-        <div class="container-fluid" ng-app = "consultorio" ng-controller = "pacientesController as cn">
+        <div class="container-fluid" ng-app = "consultorio" ng-controller = "contactosController as cn">
             <div class="row">
                 <div class="col-12">
-                    <center><h1>consultorio</h1></center> 
+                    <center><h1>Consultorio_Online</h1></center> 
                 </div>
             </div>
             <div class="row">
                 <div class="col-6">
-                   <h3>Sección 1</h3>
+                    <h3>Sección 1</h3>
                     <div class="row">
                         <div class="col-6">
-                            <label >Identificacion</label>
+                            <label >codpaciente</label>
                             <input class="form-control" type="number" min="0" ng-model="cn.identificacion" required>
                         </div>
                         <div class="col-6">
-                            <label>Nombre</label>
+                            <label>Nombres</label>
                             <input class="form-control" type="text" ng-model="cn.nombre" required>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <label>Apellido</label>
+                            <label>Apellidos</label>
                             <input class="form-control" type="text" ng-model="cn.apellido" required>
                         </div>
                         <div class="col-6">
@@ -55,13 +55,11 @@
                             <select class="form-control" ng-model="cn.tipoIdentificacion" required>
                                 <option>CC</option>
                                 <option>TI</option>
-                                <option>CE</option>
-                                <option>RC</option><!-- comment -->
                             </select>
                         </div>
                         <div class="col-6">
-                            <label>Celular</label>
-                            <input class="form-control" type="text" ng-model="cn.celular" required>
+                            <label>Telefono</label>
+                            <input class="form-control" type="text" ng-model="cn.telefono" required>
                         </div>
                     </div>
                     <div class="row">
@@ -70,22 +68,22 @@
                             <input class="form-control" type="text" ng-model="cn.direccion" required>
                         </div>
                         <div class="col-6">
-                            <label>Email</label>
-                            <input class="form-control" type="text" ng-model="cn.email" required>
+                            <label>Correo</label>
+                            <input class="form-control" type="text" ng-model="cn.correo" required>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-3">
-                            <button  class="btn btn-success" ng-click="cn.guardarPaciente()">Guardar</button>
+                            <button  class="btn btn-success" ng-click="cn.guardarContacto()">Guardar</button>
                         </div>
                         <div class="col-3">
-                            <button  class="btn btn-primary" ng-click="cn.listarPacientes()">Listar Pacientes</button>
+                            <button  class="btn btn-primary" ng-click="cn.listarContactos()">Listar contacto</button>
                         </div>
                         <div class="col-3">
-                            <button  class="btn btn-danger" ng-click="cn.eliminarPaciente()">Eliminar Pacientes</button>
+                            <button  class="btn btn-danger" ng-click="cn.eliminarContacto()">Eliminar contacto</button>
                         </div>
                         <div class="col-3">
-                            <button  class="btn btn-warning" ng-click="cn.actualizarPaciente()">Actualizar Pacientes</button>
+                            <button  class="btn btn-warning" ng-click="cn.actualizarContacto()">Actualizar contacto</button>
                         </div>
                     </div>
                 </div>
@@ -117,8 +115,8 @@
                             <input class="form-control" type="text" value="{{cn.tipoIdentificacion}}" disabled="">
                         </div>
                         <div class="col-6">
-                            <label> Celular</label>
-                            <input class="form-control" type="text" value="{{cn.celular}}" disabled="">
+                            <label>Telefono</label>
+                            <input class="form-control" type="text" value="{{cn.telefono}}" disabled="">
                         </div>
                     </div>
                     <div class="row">
@@ -127,8 +125,8 @@
                             <input class="form-control" type="text" value="{{cn.direccion}}" disabled="">
                         </div>
                         <div class="col-6">
-                            <label>Email</label>
-                            <input class="form-control" type="text" value="{{cn.email}}" disabled="">
+                            <label>Correo</label>
+                            <input class="form-control" type="text" value="{{cn.correo}}" disabled="">
                         </div>
                     </div>
                 </div>
@@ -144,21 +142,21 @@
                                 <th>Apellido</th>  
                                 <th>Genero</th>  
                                 <th>Tipo id</th>  
-                                <th>Celular</th>  
+                                <th>Telefono</th>  
                                 <th>Direccion</th>  
-                                <th>Email</th>  
+                                <th>Correo</th>  
                             </tr>  
                         </thead>
 
-                        <tr ng-repeat = "paciente in cn.pacientes">  
-                            <td>{{ paciente.identificacion}}</td>  
-                            <td>{{ paciente.nombre}}</td>  
-                            <td>{{ paciente.apellido}}</td>  
-                            <td>{{ paciente.genero}}</td>  
-                            <td>{{ paciente.tipoIdentificacion}}</td>  
-                            <td>{{ paciente.celular}}</td>  
-                            <td>{{ paciente.direccion}}</td>  
-                            <td>{{ paciente.email}}</td>    
+                        <tr ng-repeat = "contacto in cn.contactos">  
+                            <td>{{ contacto.identificacion}}</td>  
+                            <td>{{ contacto.nombre}}</td>  
+                            <td>{{ contacto.apellido}}</td>  
+                            <td>{{ contacto.genero}}</td>  
+                            <td>{{ contacto.tipoIdentificacion}}</td>  
+                            <td>{{ contacto.telefono}}</td>  
+                            <td>{{ contacto.direccion}}</td>  
+                            <td>{{ contacto.correo}}</td>  
                         </tr>  
                     </table> 
                 </div>
@@ -166,45 +164,45 @@
         </div>
     </body>
     <script>
-        var app = angular.module('consultorio', []);
-        app.controller('pacientesController', ['$http', controladorPacientes]);
-        function controladorPacientes($http) {
+        var app = angular.module('consultorioONLINE', []);
+        app.controller('contactosController', ['$http', controladorContactos]);
+        function controladorContactos($http) {
             var cn = this;
-            cn.listarPacientes = function () {
+            cn.listarContactos = function () {
                 var url = "Peticiones.jsp";
                 var params = {
-                    proceso: "listarpaciente"
+                    proceso: "listarcontacto"
                 };
                 $http({
                     method: 'POST',
                     url: 'Peticiones.jsp',
                     params: params
                 }).then(function (res) {
-                    cn.pacientes = res.data.Pacientes;
+                    cn.contactos = res.data.Contactos;
                 });
             };
-            cn.guardarPaciente = function () {
-                var paciente = {
-                    proceso: "guardarPaciente",
+            cn.guardarContacto = function () {
+                var contacto = {
+                    proceso: "guardarContacto",
                     identificacion: cn.identificacion,
                     nombre: cn.nombre,
                     apellido: cn.apellido,
                     genero: cn.genero,
                     tipoIdentificacion: cn.tipoIdentificacion,
-                    celular: cn.celular,
+                    telefono: cn.telefono,
                     direccion: cn.direccion,
-                    email: cn.email
+                    correo: cn.correo
                 };
-                console.log(paciente);
+                console.log(contacto);
                 $http({
                     method: 'POST',
                     url: 'Peticiones.jsp',
-                    params: paciente
+                    params: contacto
                 }).then(function (res) {
                     if (res.data.ok === true) {
-                        if (res.data[paciente.proceso] === true) {
+                        if (res.data[contacto.proceso] === true) {
                             alert("Guardado con éxito");
-                           cn.listarPacientes();
+                           cn.listarContactos();
                         } else {
                             alert("No se guardo Por favor vefifique sus datos");
                         }
@@ -214,20 +212,20 @@
                 });
 
             };
-            cn.eliminarPaciente = function () {
-                var paciente = {
-                    proceso: "eliminarpaciente",
+            cn.eliminarContacto = function () {
+                var contacto = {
+                    proceso: "eliminarcontacto",
                     identificacion: cn.identificacion
                 };
                 $http({
                     method: 'POST',
                     url: 'Peticiones.jsp',
-                    params: paciente
+                    params: contacto
                 }).then(function (res) {
                     if (res.data.ok === true) {
-                        if (res.data[paciente.proceso] === true) {
+                        if (res.data[contacto.proceso] === true) {
                             alert("Eliminado con éxito");
-                            //                                cn.listarpacientes();
+                            //                                cn.listarContactos();
                         } else {
                             alert("Por favor vefifique sus datos");
                         }
@@ -237,31 +235,30 @@
                 });
 
             };
-            cn.actualizarPaciente = function () {
+            cn.actualizarContacto = function () {
 
-                var paciente = {
-                    proceso: "actualizarpaciente",
+                var contacto = {
+                    proceso: "actualizarcontacto",
                     identificacion: cn.identificacion,
                     nombre: cn.nombre,
                     apellido: cn.apellido,
                     genero: cn.genero,
                     tipoIdentificacion: cn.tipoIdentificacion,
-                    celular: cn.celular,
+                    telefono: cn.telefono,
                     direccion: cn.direccion,
-                    email: cn.email
-                
+                    correo: cn.correo
                 };
                 $http({
                     method: 'POST',
                     url: 'Peticiones.jsp',
-                    params: paciente
+                    params: contacto
                 }).then(function (res) {
                     if (res.data.ok === true) {
-                        if (res.data[paciente.proceso] === true) {
-                            alert("Actualizar Paciente con éxito");
-                            //                                cn.listarpacientes();
+                        if (res.data[contacto.proceso] === true) {
+                            alert("actualizarcontacto con éxito");
+                            //                                cn.listarContactos();
                         } else {
-                            alert("Favor vefifique los datos");
+                            alert("Por favor vefifique sus datos");
                         }
                     } else {
                         alert(res.data.errorMsg);
